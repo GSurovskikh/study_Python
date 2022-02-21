@@ -31,3 +31,7 @@ class ForeignPassport(Passport):
         self.visas = str(visas)
 
 if __name__ == '__main__':
+    fp = ForeignPassport()
+    print(f"{fp.serial=}")
+    fp.serial = "3423"
+    print(f"{fp.serial=}")
