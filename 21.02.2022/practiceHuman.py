@@ -9,7 +9,7 @@ class Human:
 class Builder(Human):
     def __init__(self,age,height,name,gender,max_workweight,type_buildings):
         super(Builder, self).__init__(age,height,name,gender)
-    
+
 
 class Sailor(Human):
     def __init__(self,age,height,name,gender,type_cruise,voyages_quantity):
@@ -19,7 +19,6 @@ class Sailor(Human):
 class Pilot(Human):
     def __init__(self,age,height,name,gender,type_plane,flights_quantity):
         super(Pilot, self).__init__(age,height,name,gender)
-
 
 
 if __name__ == '__main__':
