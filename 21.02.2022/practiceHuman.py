@@ -37,3 +37,4 @@ if __name__ == '__main__':
     print(isinstance(b,Human))
     print(isinstance(s,Builder))
     print(issubclass(Pilot,Human))
+    print(issubclass(Pilot, Human))
