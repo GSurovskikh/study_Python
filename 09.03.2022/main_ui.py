@@ -20,15 +20,18 @@ class CloakroomUI(tk.Tk):
         self._lbl_acqure_free_tag = tk.Label(self,bg="#fff")
         self._lbl_acqure_free_tag.grid(column=1,row=1)
 
-        btn_return_tag = tk.Button(self, text="Вернуть номерок", padx=10, pady=10, bg="#eef")
+        btn_return_tag = tk.Button(self, text="Вернуть номерок",
+                                   padx=10, pady=10, bg="#eef",
+                                   command=self._return_tag)
         btn_return_tag.grid(column=2, row=0, rowspan=2)
+        self._lbl_return_tag = tk.Label(self, bg="#fff")
+        self._lbl_return_tag.grid(column=3, row=1)
 
         self._ent_tag_string = tk.StringVar()
         ent_tag = tk.Entry(self,textvariable=self._ent_tag_string)
         ent_tag.grid(column=3,row=0)
 
-        self._lbl_return_tag = tk.Label(self,bg="#fff")
-        self._lbl_return_tag.grid(column=3,row=1)
+
 
     def _acquire_free_tag(self):
         try:
@@ -38,8 +41,12 @@ class CloakroomUI(tk.Tk):
         except cr.NotEnoughTagsError:
             self._lbl_acqure_free_tag.configure(text="Свободных номерков нет!")
 
-    def _return_tag(self):
-        pass
+    def _return_tag(self,tag):
+        try:
+            tag = self.__cloakroom_instance.return_tag(tag)
+            self._lbl_return_tag.configure(text=f'Вернули номерок:{tag}')
+        except cr.TagAlreadyReturnedError:
+            self._lbl_return_tag.configure(text="Номерок уже в числе свободных")
 
     def run(self):
         self.mainloop()
@@ -48,6 +55,6 @@ class CloakroomUI(tk.Tk):
 
 
 if __name__ == '__main__':
-    cloakroom = cr.Cloakroom(100)
+    cloakroom = cr.Cloakroom(10)
     crui = CloakroomUI(cloakroom)
     crui.run()
